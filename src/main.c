@@ -32,6 +32,7 @@ int main ()
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
 	{
 		// drawing
+		// essa porra esta em c seu jumento
 		BeginDrawing();
 		DrawLine(x,300,x,400,BLUE);
 		DrawLine(x,500,x,600,BLUE);
