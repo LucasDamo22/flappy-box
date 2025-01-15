@@ -10,6 +10,8 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 #include "raylib.h"
 
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
+#include <stdio.h>
+
 
 #define CANVAS_WIDHT 1280
 #define CANVAS_HEIGHT 800
@@ -29,11 +31,15 @@ int main ()
 	Texture wabbit = LoadTexture("wabbit_alpha.png");
 	int x = 300;
 	// game loop
+	printf("hey max gay\n");
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
 	{
 		// drawing
 		// essa porra esta em c seu jumento
 		BeginDrawing();
+		// O MAX EH MUITO PUTO VELHO
+	
+		
 		DrawLine(x,300,x,400,BLUE);
 		DrawLine(x,500,x,600,BLUE);
 		DrawEllipse(300, 450, 20, 20, RED);
