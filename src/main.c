@@ -29,30 +29,36 @@ int main ()
 
 	// Load a texture from the resources directory
 	Texture wabbit = LoadTexture("wabbit_alpha.png");
+
 	int x = 300;
+	int box_position = 450;
+	int is_pressed = 0;
+
 	// game loop
-	printf("hey max gay\n");
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
 	{
+
+		// binds
+		if (IsKeyDown(KEY_UP) && box_position > 320 && is_pressed == 0) box_position -= 20;
+		if (IsKeyDown(KEY_UP) && box_position < 321 && is_pressed == 0) box_position = 300;
+		if (IsKeyDown(KEY_UP)) is_pressed = 1;
+		if (!IsKeyDown(KEY_UP)) is_pressed = 0;
 		// drawing
-		// essa porra esta em c seu jumento
 		BeginDrawing();
-		// O MAX EH MUITO PUTO VELHO
-	
 		
-		DrawLine(x,300,x,400,BLUE);
-		DrawLine(x,500,x,600,BLUE);
-		DrawEllipse(300, 450, 20, 20, RED);
-		// Setup the back buffer for drawing (clear color and depth buffers)
-		ClearBackground(BLACK);
+			DrawLine(x,300,x,400,BLUE);
+			DrawLine(x,500,x,600,BLUE);
+			DrawEllipse(300, box_position, 20, 20, RED);
+			// Setup the back buffer for drawing (clear color and depth buffers)
+			ClearBackground(BLACK);
 
-		// draw some text using the default font
-		DrawText("Hello Raylib dh872391hudisajn", 200,200,20,WHITE);
+			// draw some text using the default font
+			DrawText("Hello Raylib dh872391hudisajn", 200,200,20,WHITE);
 
-		// draw our texture to the screen
-		DrawTexture(wabbit, 400, 200, WHITE);
+			// draw our texture to the screen
+			DrawTexture(wabbit, 400, 200, WHITE);
 		
-		// end the frame and get ready for the next one  (display frame, poll input, etc...)
+			// end the frame and get ready for the next one  (display frame, poll input, etc...)
 		EndDrawing();
 
 	}
