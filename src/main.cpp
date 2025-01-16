@@ -11,6 +11,7 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
 #include <stdio.h>
+#include <iostream>
 
 
 #define CANVAS_WIDHT 1280
@@ -32,6 +33,7 @@ int main ()
 	int x = 300;
 	// game loop
 	printf("hey max gay\n");
+	std::cout<<"hey max"<<std::endl;
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
 	{
 		// drawing
