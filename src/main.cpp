@@ -20,17 +20,20 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 #define CANVAS_WIDHT 1280
 #define CANVAS_HEIGHT 800
 
-void generate_pillar(int iteration) {
-	int gap_ini = rand() % 101;
-	//int gap_size = x;
-	DrawLine(CANVAS_WIDHT - 10, 300, CANVAS_WIDHT - 10, 400, BLUE);
-	DrawLine(CANVAS_WIDHT - 10, 500, CANVAS_WIDHT - 10, 600, BLUE);
-}
-
-class pillar {
+class Pillar {
 	public:
 		int upperline;
 		int lowerline;
+		int lifetime;
+		int getUpperLine() const { return upperline; }
+		int getLowerLine() const { return lowerline; }
+		Pillar(int iteration) {
+			int gap_size = 60; //pode depender da iteration
+			int gap_ini = rand() % (281 - gap_size);
+			upperline = 310 + gap_ini;
+			lowerline = 310 + gap_ini + gap_size;
+			lifetime = 0;
+		}
 };
 
 int main ()
@@ -47,25 +50,35 @@ int main ()
 	// Load a texture from the resources directory
 	Texture wabbit = LoadTexture("wabbit_alpha.png");
 
+	int iteration = 0;
 	int x = 300;
+	int pillar_ini = CANVAS_WIDHT - 10;
 	int box_position = 450;
 	int is_pressed = 0;
-	//std::vector
+	std::vector<Pillar> pillars;
 
 	// game loop
 	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
 	{
+		iteration += 1;
+		if (iteration % 300 == 0|| iteration == 1) {
+			pillars.push_back(Pillar(iteration));
+		}
 		if (box_position < 580) box_position += 1;
 		// binds
 		if (IsKeyDown(KEY_UP) && box_position > 340 && is_pressed == 0) box_position -= 20;
 		if (IsKeyDown(KEY_UP) && box_position < 341 && is_pressed == 0) box_position = 320;
 		if (IsKeyDown(KEY_UP)) is_pressed = 1;
 		if (!IsKeyDown(KEY_UP)) is_pressed = 0;
+
 		// drawing
 		BeginDrawing();
-		
-			DrawLine(x,300,x,400,BLUE);
-			DrawLine(x,500,x,600,BLUE);
+			for (int i = 0; i < pillars.size(); i += 1) {
+				DrawLine(pillar_ini - pillars[i].lifetime, 300, pillar_ini - pillars[i].lifetime, pillars[i].getUpperLine(), BLUE);
+				DrawLine(pillar_ini - pillars[i].lifetime, pillars[i].getLowerLine(), pillar_ini - pillars[i].lifetime, 600, BLUE);
+				pillars[i].lifetime += 1;
+				if (pillars[i].lifetime > 1270) pillars.erase(pillars.begin() + i);
+				}
 			DrawLine(0, 600, 1280, 600, RED);
 			DrawLine(0, 300, 1280, 300, RED);
 			DrawEllipse(300, box_position, 20, 20, RED);
